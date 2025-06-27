@@ -1,0 +1,73 @@
+[
+  {
+    "slug": "postman-api",
+    "title": "Interface Postman - Mise en place des APIs",
+    "description": "Création et gestion d'APIs REST avec Postman pour automatiser les processus.",
+    "content": "## Contexte\nJ’ai créé une API REST pour gérer les utilisateurs avec des endpoints pour CRUD, authentification et gestion des permissions.\n\n## Fonctionnalités\n- GET, POST, PUT, DELETE pour les utilisateurs\n- Sécurisation par tokens JWT\n- Documentation automatique avec Postman\n\n## Démo\nVoici un exemple de requête : ...",
+    "details": {
+      "images": [
+        "/images/postman.png",
+        "/images/postman.png"
+      ],
+      "contexte": "L’objectif était de faciliter la gestion des utilisateurs via une API robuste et sécurisée.",
+      "fonctionnalites": [
+        "Endpoints CRUD pour utilisateurs",
+        "Authentification JWT",
+        "Tests automatisés avec Postman"
+      ],
+      "technologies": ["Node.js", "Express", "Postman", "JWT"],
+      "lien": "https://exemple.com/postman-api",
+      "image": "/images/postman.png"
+
+    }
+  },
+  {
+    "slug": "refonte-site",
+    "title": "Refonte d’un site Internet",
+    "description": "Modernisation complète du site, amélioration UX/UI et performances.",
+    "content": "### Ancien site\nLe site précédent était lent et avait un design dépassé.\n\n### Nouveau site\nUtilisation de Next.js et Tailwind CSS pour une interface moderne et réactive.\n\n### Résultats\nAmélioration des performances, augmentation du trafic et meilleure satisfaction utilisateur.",
+    "details": {
+      "ancienSiteImages": [
+        "/images/Capture8.png",
+        "/images/Capture9.png"
+      ],
+      "nouveauSiteImages": [
+        "/images/Capture.png",
+        "/images/Capture2.png"
+      ],
+      "contexte": "Le site était ancien et obsolète, j'ai refait tout le design en améliorant l'expérience utilisateur.",
+      "fonctionnalites": [
+        "Refonte complète de l’interface",
+        "Optimisation des performances",
+        "Amélioration de l’UX"
+      ],
+      "technologies": ["Next.js", "Tailwind CSS", "React"],
+      "lien": "https://exemple.com/refonte-site",
+        "image": "/images/Capture7.png"
+
+    }
+  },
+  {
+    "slug": "application-quiz",
+    "title": "Application Quiz Interactive",
+    "description": "Développement d’un quiz interactif avec gestion admin et suivi des scores.",
+    "content": "Cette application permet aux utilisateurs de répondre à des quiz avec un suivi en temps réel des scores et un espace administrateur pour gérer les questions.\n\nL'application est responsive et facile à utiliser.",
+    "details": {
+      "images": [
+        "/images/Capture5.png",
+        "/images/Capture7.png",
+        "/images/Capture4.png"
+      ],
+      "contexte": "Développement d’un outil ludique pour apprendre via des quiz interactifs.",
+      "fonctionnalites": [
+        "Interface utilisateur intuitive",
+        "Gestion des questions via admin",
+        "Suivi des scores en temps réel"
+      ],
+      "technologies": ["React", "Node.js", "MongoDB"],
+      "lien": "https://exemple.com/application-quiz",
+    "image": "/images/Capture.png"
+
+    }
+  }
+]
