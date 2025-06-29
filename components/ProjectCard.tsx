@@ -23,27 +23,38 @@ interface ProjectCardProps {
   project: Project;
 }
 
-
 export default function ProjectCard({ project }: { project: Project }) {
+  if (!project) return null;
+
+  const firstExtraImage =
+    project.details.images?.[0] ||
+    project.details.ancienSiteImages?.[0] ||
+    project.details.nouveauSiteImages?.[0] ||
+    null;
+
   return (
-    <article className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 cursor-pointer">
+    <div className="border p-4 rounded shadow">
       <img
         src={project.details.image}
         alt={project.title}
-        className="w-full h-48 object-cover"
-        loading="lazy"
-        decoding="async"
+        className="w-full h-40 object-cover rounded"
       />
-      <div className="p-6">
-        <h2 className="text-2xl font-semibold mb-3 text-gray-900">{project.title}</h2>
-        <p className="text-gray-700 mb-6 leading-relaxed">{project.description}</p>
-        <a
-          href={`/projects/${project.slug}`}
-          className="inline-block px-6 py-3 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition-colors duration-300"
-        >
+      {firstExtraImage && (
+        <img
+          src={firstExtraImage}
+          alt={`${project.title} - extra`}
+          className="w-full h-20 object-cover rounded mt-2"
+        />
+      )}
+      <h2 className="text-xl font-bold mt-2">{project.title}</h2>
+      <p>{project.description}</p>
+
+      <Link href={`/projects/${project.slug}`}>
+        <span className="text-blue-500 hover:underline inline-block mt-2">
           Voir le projet
-        </a>
-      </div>
-    </article>
+        </span>
+      </Link>
+    </div>
   );
 }
+

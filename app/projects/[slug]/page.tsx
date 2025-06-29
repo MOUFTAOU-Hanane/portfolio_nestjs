@@ -1,5 +1,6 @@
 // app/projects/[slug]/page.tsx
 import projects from '../../../data/projects.json';
+import Image from 'next/image';
 
 export async function generateStaticParams() {
   return projects.map((project) => ({
@@ -59,7 +60,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
       {/* Galerie d'images */}
       <section className="mb-10">
         <h2 className="text-3xl font-semibold mb-6 border-b-2 border-gray-300 pb-2">
-          Galerie d'images
+          Galerie dimages
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {project.details.images?.map((img, i) => (
@@ -67,13 +68,15 @@ export default async function ProjectPage({ params }: { params: { slug: string }
               key={i}
               className="overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
             >
-              <img
-                src={img}
-                alt={`${project.title} image ${i + 1}`}
-                className="w-full h-56 object-cover"
-                loading="lazy"
-                decoding="async"
-              />
+             <Image
+  src={img}
+  alt={`${project.title} image ${i + 1}`}
+  className="rounded-lg object-cover"
+  width={400}
+  height={224} // Correspond à h-56 environ
+  priority={false}
+/>
+
             </div>
           ))}
         </div>
