@@ -1,44 +1,22 @@
+// app/projects/[slug]/page.tsx
 import projects from '../../../data/projects.json';
-import Image from 'next/image';
-import { notFound } from 'next/navigation';
 
-// Définition du type pour les paramètres
-interface Params {
-  slug: string;
-}
-
-// Cette fonction génère les chemins dynamiques pour la génération statique
 export async function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
   }));
 }
 
-// Définition du type du projet
-interface Project {
-  slug: string;
-  title: string;
-  description: string;
-  details: {
-    contexte: string;
-    fonctionnalites: string[];
-    technologies: string[];
-    lien?: string;
-    images?: string[];
-  };
-}
-
-// ✅ Version simple, sûre, sans conflit de typage
-export default function ProjectPage({ params }: { params: Params }) {
-  // Utilisation correcte de params
-  const { slug } = params;
-
-  // Recherche du projet correspondant au slug
+export default async function ProjectPage({ params }: { params: { slug: string } }) {
+  const { slug } = params; // params est maintenant un objet déjà résolu ici
   const project = projects.find((p) => p.slug === slug);
 
-  // Si le projet n'est pas trouvé, retourner une erreur 404
   if (!project) {
-    notFound();
+    return (
+      <div className="max-w-4xl mx-auto p-8 text-center text-red-600 font-semibold">
+        Projet non trouvé
+      </div>
+    );
   }
 
   return (
@@ -60,7 +38,7 @@ export default function ProjectPage({ params }: { params: Params }) {
           Fonctionnalités
         </h2>
         <ul className="list-disc list-inside space-y-2 text-base leading-relaxed">
-          {project.details.fonctionnalites.map((fct: string, i: number) => (
+          {project.details.fonctionnalites.map((fct, i) => (
             <li key={i}>{fct}</li>
           ))}
         </ul>
@@ -72,7 +50,7 @@ export default function ProjectPage({ params }: { params: Params }) {
           Technologies utilisées
         </h2>
         <ul className="list-disc list-inside space-y-2 text-base leading-relaxed">
-          {project.details.technologies.map((tech: string, i: number) => (
+          {project.details.technologies.map((tech, i) => (
             <li key={i}>{tech}</li>
           ))}
         </ul>
@@ -81,25 +59,39 @@ export default function ProjectPage({ params }: { params: Params }) {
       {/* Galerie d'images */}
       <section className="mb-10">
         <h2 className="text-3xl font-semibold mb-6 border-b-2 border-gray-300 pb-2">
-          Galerie d&apos;images
+          Galerie dImages
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {project.details.images?.map((img: string, i: number) => (
+          {project.details.images?.map((img, i) => (
             <div
               key={i}
               className="overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
             >
-              <Image
+              <img
                 src={img}
                 alt={`${project.title} image ${i + 1}`}
-                className="rounded-lg object-cover"
-                width={400}
-                height={224}
+                className="w-full h-56 object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           ))}
         </div>
       </section>
+
+      {/* Lien vers le projet */}
+      {project.details.lien && (
+        <section className="mt-12 text-center">
+          <a
+            href={project.details.lien}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded shadow transition-colors duration-300"
+          >
+            Voir le projet en ligne
+          </a>
+        </section>
+      )}
     </main>
   );
 }

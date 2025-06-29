@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import Image from 'next/image'; // Importation du composant Image de Next.js
+import Image from 'next/image'; // Importer le composant Image de Next.js
 
-// Définition de l'interface Project dans le même fichier
+// Définition de l'interface pour un projet
 interface Project {
   slug: string;
   title: string;
@@ -22,6 +22,7 @@ interface Project {
 export default function ProjectCard({ project }: { project: Project }) {
   if (!project) return null;
 
+  // Choisir l'image supplémentaire
   const firstExtraImage =
     project.details.images?.[0] ||
     project.details.ancienSiteImages?.[0] ||

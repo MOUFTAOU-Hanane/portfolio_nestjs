@@ -18,7 +18,6 @@
       "technologies": ["Node.js", "Express", "Postman", "JWT"],
       "lien": "https://exemple.com/postman-api",
       "image": "/images/postman.png"
-
     }
   },
   {
@@ -43,8 +42,7 @@
       ],
       "technologies": ["Next.js", "Tailwind CSS", "React"],
       "lien": "https://exemple.com/refonte-site",
-        "image": "/images/Capture7.png"
-
+      "image": "/images/Capture7.png"
     }
   },
   {
@@ -66,8 +64,7 @@
       ],
       "technologies": ["React", "Node.js", "MongoDB"],
       "lien": "https://exemple.com/application-quiz",
-    "image": "/images/Capture.png"
-
+      "image": "/images/Capture.png"
     }
   }
 ]
