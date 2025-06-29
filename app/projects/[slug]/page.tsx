@@ -1,6 +1,13 @@
 // app/projects/[slug]/page.tsx
 import projects from '../../../data/projects.json';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
+
+type PageProps = {
+  params: {
+    slug: string;
+  };
+};
 
 export async function generateStaticParams() {
   return projects.map((project) => ({
@@ -8,16 +15,12 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
-  const { slug } = params; // params est maintenant un objet déjà résolu ici
+export default async function ProjectPage({ params }: PageProps) {
+  const { slug } = params;
   const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
-    return (
-      <div className="max-w-4xl mx-auto p-8 text-center text-red-600 font-semibold">
-        Projet non trouvé
-      </div>
-    );
+    notFound(); // Meilleure pratique Next.js App Router
   }
 
   return (
@@ -60,7 +63,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
       {/* Galerie d'images */}
       <section className="mb-10">
         <h2 className="text-3xl font-semibold mb-6 border-b-2 border-gray-300 pb-2">
-          Galerie dimages
+          Galerie d&apos;images
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {project.details.images?.map((img, i) => (
@@ -68,15 +71,14 @@ export default async function ProjectPage({ params }: { params: { slug: string }
               key={i}
               className="overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
             >
-             <Image
-  src={img}
-  alt={`${project.title} image ${i + 1}`}
-  className="rounded-lg object-cover"
-  width={400}
-  height={224} // Correspond à h-56 environ
-  priority={false}
-/>
-
+              <Image
+                src={img}
+                alt={`${project.title} image ${i + 1}`}
+                className="rounded-lg object-cover"
+                width={400}
+                height={224}
+                priority={false}
+              />
             </div>
           ))}
         </div>
