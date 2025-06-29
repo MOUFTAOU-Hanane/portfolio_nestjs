@@ -19,10 +19,6 @@ interface Project {
 }
 
 
-interface ProjectCardProps {
-  project: Project;
-}
-
 export default function ProjectCard({ project }: { project: Project }) {
   if (!project) return null;
 
