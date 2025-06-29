@@ -1,15 +1,16 @@
-// app/projects/[slug]/page.tsx
 import projects from '../../../data/projects.json';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
+// ✅ Type correct pour les props
 type PageProps = {
   params: {
     slug: string;
   };
 };
 
-export async function generateStaticParams() {
+// ✅ Type correct pour generateStaticParams
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return projects.map((project) => ({
     slug: project.slug,
   }));
@@ -20,7 +21,7 @@ export default async function ProjectPage({ params }: PageProps) {
   const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
-    notFound(); // Meilleure pratique Next.js App Router
+    notFound(); // meilleure pratique App Router
   }
 
   return (
