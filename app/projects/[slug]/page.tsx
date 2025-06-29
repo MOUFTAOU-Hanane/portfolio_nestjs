@@ -2,19 +2,41 @@ import projects from '../../../data/projects.json';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
+// Définition du type pour les paramètres
+interface Params {
+  slug: string;
+}
+
+// Cette fonction génère les chemins dynamiques pour la génération statique
 export async function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
   }));
 }
 
-// ✅ Version simple, sûre, sans conflit de typage
-export default async function ProjectPage({ params }: any) {
-  // Utilisation de l'await pour récupérer le slug de manière asynchrone
-  const { slug } = await params; // Assure-toi que params est récupéré correctement
+// Définition du type du projet
+interface Project {
+  slug: string;
+  title: string;
+  description: string;
+  details: {
+    contexte: string;
+    fonctionnalites: string[];
+    technologies: string[];
+    lien?: string;
+    images?: string[];
+  };
+}
 
+// ✅ Version simple, sûre, sans conflit de typage
+export default function ProjectPage({ params }: { params: Params }) {
+  // Utilisation correcte de params
+  const { slug } = params;
+
+  // Recherche du projet correspondant au slug
   const project = projects.find((p) => p.slug === slug);
 
+  // Si le projet n'est pas trouvé, retourner une erreur 404
   if (!project) {
     notFound();
   }
@@ -78,8 +100,6 @@ export default async function ProjectPage({ params }: any) {
           ))}
         </div>
       </section>
-
-      
     </main>
   );
 }
