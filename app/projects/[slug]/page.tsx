@@ -2,26 +2,18 @@ import projects from '../../../data/projects.json';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
-// ✅ Type correct pour les props
-type PageProps = {
-  params: {
-    slug: string;
-  };
-};
-
-// ✅ Type correct pour generateStaticParams
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
+export async function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
   }));
 }
 
-export default async function ProjectPage({ params }: PageProps) {
-  const { slug } = params;
+export default async function ProjectPage({ params }: { params: { slug: string } }) {
+  const slug = params.slug;
   const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
-    notFound(); // meilleure pratique App Router
+    notFound();
   }
 
   return (
@@ -78,7 +70,6 @@ export default async function ProjectPage({ params }: PageProps) {
                 className="rounded-lg object-cover"
                 width={400}
                 height={224}
-                priority={false}
               />
             </div>
           ))}
