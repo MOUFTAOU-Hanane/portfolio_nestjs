@@ -8,8 +8,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
-  const slug = params.slug;
+// ✅ Version simple, sûre, sans conflit de typage
+export default async function ProjectPage({ params }: any) {
+  // Utilisation de l'await pour récupérer le slug de manière asynchrone
+  const { slug } = await params; // Assure-toi que params est récupéré correctement
+
   const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
@@ -35,7 +38,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
           Fonctionnalités
         </h2>
         <ul className="list-disc list-inside space-y-2 text-base leading-relaxed">
-          {project.details.fonctionnalites.map((fct, i) => (
+          {project.details.fonctionnalites.map((fct: string, i: number) => (
             <li key={i}>{fct}</li>
           ))}
         </ul>
@@ -47,7 +50,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
           Technologies utilisées
         </h2>
         <ul className="list-disc list-inside space-y-2 text-base leading-relaxed">
-          {project.details.technologies.map((tech, i) => (
+          {project.details.technologies.map((tech: string, i: number) => (
             <li key={i}>{tech}</li>
           ))}
         </ul>
@@ -59,7 +62,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
           Galerie d&apos;images
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {project.details.images?.map((img, i) => (
+          {project.details.images?.map((img: string, i: number) => (
             <div
               key={i}
               className="overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
@@ -76,19 +79,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
         </div>
       </section>
 
-      {/* Lien vers le projet */}
-      {project.details.lien && (
-        <section className="mt-12 text-center">
-          <a
-            href={project.details.lien}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded shadow transition-colors duration-300"
-          >
-            Voir le projet en ligne
-          </a>
-        </section>
-      )}
+      
     </main>
   );
 }
