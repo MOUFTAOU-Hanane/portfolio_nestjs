@@ -4,7 +4,7 @@ export default function About() {
       <h1 className="text-4xl font-extrabold text-gray-900 mb-8">À propos de moi</h1>
 
       <p className="text-lg leading-relaxed text-gray-700 mb-6">
-        Je m&apos;appelle <span className="font-semibold">Hanane MMOUFTAOU</span>. Titulaire d&apos;une licence en Informatique, Réseaux et Télécommunications, complétée par un Bachelor en Conception et Développement d&apos;Applications, je prépare actuellement un Master en Expertise en Architecture et Développement Logiciel.
+        Je m&apos;appelle <span className="font-semibold">Hanane MOUFTAOU</span>. Titulaire d&apos;une licence en Informatique, Réseaux et Télécommunications, complétée par un Bachelor en Conception et Développement d&apos;Applications, je prépare actuellement un Master en Expertise en Architecture et Développement Logiciel.
       </p>
 
       <p className="text-lg leading-relaxed text-gray-700 mb-6">
