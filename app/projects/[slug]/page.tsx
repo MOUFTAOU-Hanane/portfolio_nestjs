@@ -1,22 +1,23 @@
-// app/projects/[slug]/page.tsx
-import projects from '../../../data/projects.json';
+import { notFound } from 'next/navigation'; // Pour afficher une page 404
+import projects from '../../../data/projects.json'; // Charger les données du fichier JSON
 
+// Cette fonction génère les slugs pour la génération des pages dynamiques
 export async function generateStaticParams() {
   return projects.map((project) => ({
-    slug: project.slug,
+    slug: project.slug, // Génère un tableau des slugs
   }));
 }
 
+// Page dynamique pour afficher le projet correspondant au slug
 export default async function ProjectPage({ params }: { params: { slug: string } }) {
-  const { slug } = params; // params est maintenant un objet déjà résolu ici
+  const { slug } = params; // Extraction du slug des paramètres
+
+  // Recherche du projet correspondant au slug
   const project = projects.find((p) => p.slug === slug);
 
+  // Si le projet n'existe pas, on retourne une page 404
   if (!project) {
-    return (
-      <div className="max-w-4xl mx-auto p-8 text-center text-red-600 font-semibold">
-        Projet non trouvé
-      </div>
-    );
+    notFound();
   }
 
   return (
@@ -59,7 +60,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
       {/* Galerie d'images */}
       <section className="mb-10">
         <h2 className="text-3xl font-semibold mb-6 border-b-2 border-gray-300 pb-2">
-          Galerie dImages
+          Galerie d'images
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {project.details.images?.map((img, i) => (
