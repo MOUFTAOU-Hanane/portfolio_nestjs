@@ -80,19 +80,6 @@ export default async function ProjectPage({ params }: { params: { slug: string }
         </div>
       </section>
 
-      {/* Lien vers le projet */}
-      {project.details.lien && (
-        <section className="mt-12 text-center">
-          <a
-            href={project.details.lien}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded shadow transition-colors duration-300"
-          >
-            Voir le projet en ligne
-          </a>
-        </section>
-      )}
     </main>
   );
 }
